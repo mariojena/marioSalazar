@@ -1,0 +1,137 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-10">
+          {% for post in posts %}
+            <div class="card mt-4" id="post-{{post.id}}">
+                <!-- Card header START -->
+                <div class="card-header border-0 pb-0">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <!-- Avatar -->
+                      <!-- For this have to give an exact size using rem or em -->
+                      <div class="avatar avatar-story me-2">
+                        <a href="{% url 'page_user' post.user_id %}"> <img class="avatar-img rounded-circle" src="{{ post.profile_photo }}" alt="Profile photo of {{ post.username }}"> </a>
+                      </div>
+                      <!-- Info -->
+                      <div>
+                        <div class="nav nav-divider" id="divlocation{{ post.id }}">
+                          <h6 class="nav-item card-title mb-0 ml-2"> <a href="{% url 'page_user' post.user_id %}"> {{ post.username.capitalize }} </a></h6>
+                          {% if post.location %}<form action="https://www.google.com/search" method="get" id="location{{ post.id }}"><input class="d-none" name="q" type="search" value="{{ post.location }}"></a><button class="nav-item small ml-2 border-0 bg-transparent text-info" type="submit">{{ post.location }}</button></form> {% endif %}
+                        </div>
+                        <p class="mb-0 small ml-2">{{ post.date }}</p>
+                      </div>
+                    </div>
+                    <!-- Card feed action dropdown START -->
+                    {% if request.user.username == post.username %}
+                    <div class="dropdown">
+                      <a class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="dropdown-{{post.id}}">
+                        <i class="bi bi-three-dots"></i>
+                      </a>
+                      <!-- Card feed action dropdown menu -->
+                      <ul class="dropdown-menu dropdown-menu-end drop-post" id="droplist-{{post.id}}">
+                        <li id="edit-{{post.id}}"><a class="dropdown-item"> <i class="bi bi-pencil-fill fa-fw pe-2"></i>Edit</a></li>
+                        <li id="deletepost-{{post.id}}"><a class="dropdown-item"> <i class="bi bi-trash fa-fw pe-2"></i>Delete</a></li>
+                      </ul>
+                    </div>
+                    {% endif %}
+                    <!-- Card feed action dropdown END -->
+                  </div>
+                </div>
+                <!-- Card header END -->
+                <!-- Card body START -->
+                <div class="card-body">
+                  <div class="container" id="container{{post.id}}">
+                    <p id="descriptionp{{ post.id }}">{{ post.description }}</p>
+                    <!-- Card img -->
+                    {% if post.img_url %}
+                    <img class="card-img" src="{{ post.img_url }}" id="img{{ post.id }}">
+                    {% endif %}
+                  </div>
+                  <!-- Feed react START -->
+                  {% if user.is_authenticated %}
+                  <ul class="nav nav-stack py-3 small">
+                    <li class="nav-item">
+                      <button class="nav-link active {% if not request.user.username in post.like %}like{%else%}liked{% endif %}" id="likepost-{{ post.id }}"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i> Like <p class="d-inline" id="countp-{{ post.id }}">{% if post.like %}{{ post.like|length }}{% endif %}</p></button>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-secondary"> <i class="bi bi-chat-fill pe-1"></i> Comments {% if post.comments %}{{ post.comments.count }}{% endif %}</a>
+                    </li>
+                  </ul>
+                  <!-- Feed react END -->
+
+                  <!-- Add comment -->
+                  <div class="d-flex mb-3">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs me-2">
+                      <a href="{% url 'page_user' request.user.id %}"> <img class="avatar-img rounded-circle mr-2" src="{{ profile.profile_photo }}" alt=""></a>
+                    </div>
+                    <!-- Comment box  -->
+                    <form class="w-100">
+                      <div class="input-group">
+                        <textarea id="contentcomment-{{ post.id }}" class="form-control pe-4 bg-light border-right-0" rows="1" placeholder="Add a comment..." style="height: 3rem;"></textarea>
+                        <div class="input-group-prepend">
+                          <button type="button" id="addcomment-{{ post.id }}" class="input-group-text text-primary bg-transparent border-left-0 rounded-right"><i class="bi bi-send"></i></button>
+                        </div>
+                    </div>
+                    </form>
+                  </div>
+                  {% endif %}
+                  <!-- Comment wrap START -->
+
+                  <ul class="comment-wrap list-unstyled" id="commentspost{{ post.id }}">
+                    <!-- Comment item START -->
+                    {% for comment in post.comments %}
+                    <li class="comment-item w-100" id="comment-{{ comment.id }}">
+                      <div class="d-flex position-relative">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs">
+                          <a href="{% url 'page_user' comment.user_id %}"><img class="avatar-img rounded-circle" src="{{ comment.profile_photo }}" alt="Profile photo of {{ comment.username }}"></a>
+                        </div>
+                        <div class="ms-2 w-100">
+                          <!-- Comment by -->
+                          <div class="bg-light rounded-start-top-0 p-3 rounded">
+                            <div class="d-flex justify-content-between">
+                              <h6 class="mb-1"> <a href="{% url 'page_user' comment.user_id %}"> {{ comment.username.capitalize }} </a></h6>
+                              <div class="d-block">
+                                <small class="ms-2 d-inline">{{ comment.date }}</small>
+                                {% if request.user.username == comment.username %}
+                                <div class="dropdown d-inline">
+                                  <a class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="dropdownc-{{comment.id}}">
+                                    <i class="bi bi-three-dots"></i>
+                                  </a>
+                                  <!-- Card feed action dropdown menu -->
+                                  <ul class="dropdown-menu dropdown-menu-end drop-post" id="droplistc-{{comment.id}}">
+                                    <li id="deletec-{{comment.id}}"><a class="dropdown-item"> <i class="bi bi-trash fa-fw pe-2"></i>Delete</a></li>
+                                  </ul>
+                                </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                            <p class="small mb-0">{{ comment.content }}</p>
+                          </div>
+                          <!-- Comment react -->
+                          {% if user.is_authenticated %}
+                          <ul class="nav nav-divider py-2 small">
+                            <li class="nav-item">
+                              <button class="nav-link active {% if not request.user.username in comment.like %}like{%else%}liked{% endif %}" id="likecomment-{{ comment.id }}"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i> Like <p class="d-inline" id="countc-{{ comment.id }}">{% if comment.like %}{{ comment.like|length }}{% endif %}</p> </button>
+                            </li>
+                          </ul>
+                          {% endif  %}
+                        </div>
+                      </div>
+                    </li>
+                        <!-- Comment item END -->
+                      {% endfor %}
+                  </ul>
+                  <!-- Comment wrap END -->
+                </div>
+                <!-- Card body END -->
+              </div>
+              {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

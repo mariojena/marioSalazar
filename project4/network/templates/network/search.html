@@ -1,0 +1,39 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<div class="container-fluid w-75">
+    {% for profile_page in result %}
+    <a href="{% url 'page_user' profile_page.id %}">
+        <div class="card">
+            <!-- Cover image -->
+            <div class="h-200px rounded-top" style="background-image:url({{profile_page.cover_photo}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                <!-- Card body START -->
+                <div class="card-body py-0">
+                    <div class="d-sm-flex align-items-start text-sm-start">
+                    <div>
+                    <!-- Avatar -->
+                        <div class="avatar avatar-xxl mt-n5 mb-3">
+                                <img class="avatar-img rounded-circle border border-white border-3" src="{{ profile_page.profile_photo }}" alt="">
+                        </div>
+                    </div>
+                    <div class="container my-auto">
+                        <div class="ms-sm-4 mt-sm-3 d-inline">
+                            <!-- Info -->
+                            <h1 class="mb-0 ml-3 h5 d-inline"> {{ profile_page.username.capitalize }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
+                            <p class="ml-3 d-inline"> {{ profile_page.followers.count }} followers</p>
+                            <p class="ml-3 d-inline"> {{ profile_page.following|length }} following</p>
+                        </div>
+                    <!-- Button -->
+                    </div>
+                </div>
+                    <!-- List profile -->
+                    <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0 mb-3">
+                        <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{ profile_page.date_joined }}</li>
+                    </ul>
+            </div>
+        <!-- Card body END -->
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
