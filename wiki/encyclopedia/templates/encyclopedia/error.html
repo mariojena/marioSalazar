@@ -1,0 +1,34 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <h1>SORRY!</h1>
+    {% if error == 1 %}
+        <br><br>
+        <h3><strong>{{ title }}</strong> already exists</h3>
+        <p>The content of the actual page of {{ title }} is:</p>
+        {{ description |safe }}
+        <br><br>
+        <a href="/wiki/{{ title }}/">
+            <button class="btn btn-primary" type="submit" value="{{ title }}" name="entry">
+                    {{ title }}'s page
+            </button>
+        </a>
+    {% elif error == 2 %}
+        <br><br>
+        <h3><strong>{{ title }}</strong> doesn't exist</h3>
+        <br>
+        <h5>Do you want to create <strong>{{ title }}</strong>?</h5>
+        <a href="{% url 'new' %}"><button class="btn btn-primary"> Create New Page</button></a>
+    {% elif error == 3 %}
+    <br><br>
+    <h1> No results for <strong>{{ title }}</strong> were found</h1>
+    <br>
+    <h5>Do you want to create <strong>{{ title }}?</strong></h5>
+    <a href="{% url 'new' %}"><button class="btn btn-primary"> Create New Page</button></a>
+    {% endif %}
+
+{% endblock %}
