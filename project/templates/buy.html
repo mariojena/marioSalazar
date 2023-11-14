@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+  <h1>Buy</h1>
+      <form action="/buy" method="post">
+        <div class="container-fluid card shadow-sm">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <table class="table table-bordered mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Fruit/vegetable</th>
+                      <th scope="col">Package</th>
+                      <th scope="col">Quantity available</th>
+                      <th scope="col">Price/unity</th>
+                      <th scope="col">Quantity order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in available %}
+                      <tr>
+                        <th>{{ row["id"] }}</th>
+                        <td>{{ row["fruit_v_a"] }}</td>
+                        <td>{{ row["package_a"] }}</td>
+                        <td>{{ row["quantity"] }}</td>
+                        <td>{{ row["price_a"] * 1.05 }}</td>
+                        <td>
+                          <input min="0" name="quantity{{ row["id"] }}" id="quantity{{ row["id"] }}" type="number" class="form-control form-control-sm" placeholder="Quantity order" max="{{ row["quantity"] }}">
+                        </td>
+                        <td>
+                          <button type="submit" class="btn btn-primary" name="id" id="id" value="{{ row["id"] }}"><i class="bi bi-cart-dash-fill"></i>Buy</button>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<script>
+    $( function() {
+      $( "#datepicker" ).datepicker( {dateFormat: 'yy-mm-dd'});
+        } );
+    </script>
+    <form action="/register" method="post">
+        <div class="container-fluid card shadow-sm">
+        <h2>Personal Information</h2>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>First name</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" autofocus placeholder="First name" aria-label="First name" name="first_name" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Last name</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" placeholder="Last name" aria-label="Last name" name="last_name" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Username</strong></label>
+                        <input autocomplete="off" class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" aria-describedby="inputGroupPrepend3" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Password</strong></label>
+                        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Confirm Password</strong></label>
+                        <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" type="password" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>E-mail</strong></label>
+                        <input class="form-control mx-auto w-auto" id="email" name="email" type="text" placeholder="e-mail" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Role</strong></label>
+                        <select class="form-select mx-auto w-auto" aria-label="Default select example" name="role" required>
+                            <option selected><strong>Select your role</strong></option>
+                            <option value="seller">Seller</option>
+                            <option value="buyer">Buyer</option>
+                        </select>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Birthday (MM/DD/YYYY)</strong></label>
+                        <input class="form-control mx-auto w-auto" type="text" id="datepicker" placeholder="Birthday (MM/DD/YYYY)" name="birthday" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid card mt-3 shadow-sm">
+            <h2>Residence Information</h2>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>City</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="city" placeholder="City" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Address</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="address" placeholder="Address" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Neighbourhood</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="neighbourhood" placeholder="Neighbourhood" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Zip</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="zip_n" placeholder="Zip" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid card mt-3 shadow-sm">
+            <h2>Legal Information</h2>
+                <div class="row mb-3">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>ID type</strong></label>
+                        <select class="form-select mx-auto w-auto" aria-label="Default select example" name="document" required>
+                            <option selected>Select your ID type</option>
+                            <option value="document">Document</option>
+                            <option value="passport">Passport</option>
+                        </select>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>ID number</strong></label>
+                        <input class="form-control mx-auto w-auto" type="text" placeholder="ID number" name="citizen_id">
+                    </div>
+                </div>
+            </div>
+            </div>
+        <button class="btn btn-primary mt-3" type="submit">Register</button>
+    </form>
+{% endblock %}

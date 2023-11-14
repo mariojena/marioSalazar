@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add money
+{% endblock %}
+
+{% block main %}
+    <h1>Add money</h1>
+        <form action="/add_money" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="more_money" placeholder="Add money" type="number">
+            </div>
+            <div class="container-fluid">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+
+                <div class="container">
+
+                  <div class="form-outline mb-5">
+                    <input type="numeric" id="number" class="form-control form-control-lg active" siez="17" name="number" minlength="12" maxlength="19">
+                    <label class="form-label" for="typeText" style="margin-left: 0px;">Card Number</label>
+                  <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 83.2px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                  <div class="form-outline mb-5">
+                    <input type="text" id="typeName" class="form-control form-control-lg active" siez="17">
+                    <label class="form-label" for="typeName" style="margin-left: 0px;">Name on card</label>
+                  <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88px;"></div><div class="form-notch-trailing"></div></div></div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type="text" id="typeExp" class="form-control form-control-lg active" placeholder="MM/YY" size="5" minlength="5" maxlength="5">
+                        <label class="form-label" for="typeExp" style="margin-left: 0px;">Expiration</label>
+                      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 64.8px;"></div><div class="form-notch-trailing"></div></div></div>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                      <div class="form-outline">
+                        <input type="password" id="typeText" class="form-control form-control-lg active" placeholder="●●●" size="1" minlength="3" maxlength="3">
+                        <label class="form-label" for="typeText" style="margin-left: 0px;">Cvv</label>
+                      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 28.8px;"></div><div class="form-notch-trailing"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+{% endblock %}

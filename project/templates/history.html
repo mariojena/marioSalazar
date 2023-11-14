@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1>Buy</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Fruit/Vegetable</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Package</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Transaction Value</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Seller id</th>
+                    <th scope="col">Buyer id</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in transactions %}
+                    <tr>
+                        <td>{{ row["id"] }}</td>
+                        <td>{{ row["fruit_v"] }}</td>
+                        <td>{{ row["quantity"] }}</td>
+                        <td>{{ row["package_t"] }}</td>
+                        <td>{{ row["price"] }}</td>
+                        <td>{{ row["transaction_value"] }}</td>
+                        <td>{{ row["type"] }}</td>
+                        <td>{{ row["date"] }}</td>
+                        <td>{{ row["seller_id"] }}</td>
+                        <td>{{ row["buyer_id"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

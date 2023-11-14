@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    {% if info[0]["role"] == 'buyer' %}
+        <h2 align="right">Hello <strong>{{ info[0]["first_name"] }}</strong> </h2>
+        <h3 align="right">How may we help you?</h3>
+        <h4 align="left"> Your current balance is: <strong class="text-success">{{cash}}</h4>
+    {% else %}
+        <h2 align="right">Hello <strong>{{ info[0]["first_name"] }}</strong> </h2>
+        <h3 align="right">What do you want to sell today?</h3>
+        <h4 align="left"> Your current balance is: <strong class="text-success">{{cash}}</h4>
+    {% endif %}
+    <div class="container-fluid mb-3 mw-3">
+        <img src="https://i0.wp.com/www.lacoladerata.co/wp-content/uploads/2022/01/El-Convite-Campesino-en-Boyaca.jpg?fit=1920%2C1080&ssl=1" alt="..." style="height: auto; max-width: 100%;">
+    </div>
+
+    <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#Collapse1" aria-expanded="false" aria-controls="Collapse1">
+            Why to trade with FRUVI?
+        </button>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#Collapse2" aria-expanded="false" aria-controls="Collapse2">
+            Tips
+        </button>
+    </p>
+    <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="Collapse1">
+            <div class="card card-body border-success text-black" font color="black">
+              Our providers offer fruits and vegetables of the best quality. Besides that, we offer a good logistic service, in our platform you can always check where your order is.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="collapse multi-collapse" id="Collapse2">
+            <div class="card card-body border-warning text-black">
+              Always check the actual prices in the market. If something has happened, contact us immediately, sure we will help you to solve as quickly as possible.
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

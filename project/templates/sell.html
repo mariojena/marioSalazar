@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <h1>Sell</h1>
+        <form action="/sell" method="post">
+            <div class="container-fluid card shadow-sm">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Fruit or vegtable</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="fruit_v" placeholder="Fruit or vegtable" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Type of package</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="package_t" placeholder="Package" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Quantity</strong></label>
+                        <input type="numeric" class="form-control mx-auto w-auto" name="quantity" placeholder="Quantity" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Price</strong></label>
+                        <input type="numeric" class="form-control mx-auto w-auto" name="price" placeholder="Price" required>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary mt-3" type="submit">Sell</button>
+        </form>
+{% endblock %}

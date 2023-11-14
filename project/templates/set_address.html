@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change address
+{% endblock %}
+
+{% block main %}
+<h2 align="left" style="color: #dc3545;"><em>{{ db[0]["first_name"] }}, </em></h2>
+<h3 align="left" style="color: teal;">your actual residence information</h3>
+    <form action="/set_address" method="post">
+            <div class="container-fluid card mt-3 shadow-sm">
+            <h2>Residence Information</h2>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>City</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="city" placeholder="City" value="{{ db[0]["city"] }}" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Address</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="address" placeholder="Address" value="{{ db[0]["address"] }}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Neighbourhood</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="neighbourhood" placeholder="Neighbourhood" value="{{ db[0]["neighbourhood"] }}" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="validationServer05" class="form-label"><strong>Zip</strong></label>
+                        <input type="text" class="form-control mx-auto w-auto" name="zip_n" placeholder="Zip" value="{{ db[0]["zip_n"] }}" required>
+                    </div>
+                </div>
+            </div>
+        <button class="btn btn-primary mt-3" type="submit">Register</button>
+    </form>
+{% endblock %}
