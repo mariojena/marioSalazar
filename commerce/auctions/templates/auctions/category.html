@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{ category }}</h2>
+    {% for listing in listings %}
+    <a href="{% url 'listings' listing.id %}" class="txtnone">
+        <div class="container-fluid sep">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{{ listing.img_url }}" width=100%>
+                </div>
+
+                <div class="col-sm-8">
+                    <h4>{{ listing.title }}</h4>
+                    <p><strong>Price:</strong> ${{ listing.price }}</p>
+                    {% if listing.description %}
+                        <p>{{ listing.description }}</p>
+                    {% endif %}
+                    <p clasS="date">Created {{ listing.date }}</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+{% endblock %}

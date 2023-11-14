@@ -1,0 +1,33 @@
+body {
+    padding: 10px;
+}
+
+.sep {
+    border-radius: 5px;
+    border:1px solid gray;
+    margin-bottom:20px;
+}
+.date {
+    color:grey;
+    font-size:14px;
+}
+
+.txtnone {
+    text-decoration: none;
+    color:inherit;
+}
+
+.txtnone:hover {
+    text-decoration: none;
+    opacity:0.5;
+    color:inherit;
+}
+
+.divdtls {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.bcontent {
+    margin-top: 10px;
+}

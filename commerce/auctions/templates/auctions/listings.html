@@ -1,0 +1,120 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if listing.active == True or request.user.id == listing.w_bidder.id or request.user.id == listing.seller.id %}
+    {%  if message %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ request.user.username }} </strong>{{ message }}
+        </div>
+    {% endif %}
+    <h2>Listing: <strong>{{ listing.title }}</strong></h2>
+    {% if user.is_authenticated and listing.active == True %}
+    {% if listing in watchlist.products.all %}
+    <form action="{% url 'listings' listing.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary btn-sm" name="remove">Remove from Watchlist</button>
+    </form>
+    {% else %}
+    <form action="{% url 'listings' listing.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm" name="watchlist">Add to Watchlist</button>
+    </form>
+    {% endif %}
+    {% endif %}
+    <div class="container-fluid mt-1">
+        <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ listing.img_url }}" width=60%>
+                </div>
+            </div>
+
+            <div class="row">
+                {% if listing.description %}
+                    <p>{{ listing.description }}</p>
+                {% endif %}
+                <h3>${{ listing.price }}</h3>
+                <p style="color:grey; font-size:14px;">Created {{ listing.date }}</p>
+            </div>
+            <h5>{{ countbid }} bid(s) so far. Your bid is the current bid</h5>
+            {% if user.is_authenticated and listing.active == True %}
+            <form action="{% url 'listings' listing.id %}" method="POST">
+                {% csrf_token %}
+                <div class="col-8">
+                    {{ formbid }}
+                </div>
+                <button type="submit" class="btn btn-primary" name="bid" style="margin-top:10px;">Place Bid</button>
+            </form>
+            {% endif  %}
+            <div class="container-fluid divdtls">
+                <div class="row">
+                    <div class="col-10">
+                        <h3>Details</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <p>Listed by: <a href="{% url 'person' listing.seller.id %}">{{ listing.seller }}</a></p>
+                    </div>
+                    <div class="col-10">
+                        {% if listing.category %}
+                        <p>Category: <a href="{% url 'catego' listing.category.url %}"> {{ listing.category }}</a></p>
+                        {% else %}
+                        <p>Category: {{ listing.category }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if listing.seller.id == request.user.id and listing.active == True %}
+            <form action="{% url 'listings' listing.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" name="close" style="margin-top:10px;">Close Auction</button>
+            </form>
+            {% endif  %}
+                <h6>Bids:</h6>
+                {% for bid in bidlist %}
+                    <P>Bid for {{ bid.offer }} on {{ bid.date }} by {{ bid.bidder }}</P>
+                {% endfor %}
+        </div>
+        <!-- missing to show all the comments for this product-->
+        <div class="col-6">
+            {% if user.is_authenticated and listing.active == True %}
+            <form action="{% url 'listings' listing.id %}" method="POST">
+                {% csrf_token %}
+                <div class="col-12">
+                    {{ formcomment }}
+                </div>
+                <button type="submit" class="btn btn-primary" name="comment" style="margin-top:10px;">Comment</button>
+            </form>
+            {% endif  %}
+        <h6>comments:</h6>
+        {% for comment in comments %}
+        <section style="background-color: #e7effd;" class="col-12">
+            <div class="container my-0 py-0 text-dark">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="d-flex flex-start mb-4">
+                            <div class="card w-100">
+                                <div class="card-body p-1">
+                                    <div class="">
+                                        <h6 class="mb-0">{{ comment.writer }}</h6>
+                                        <p class="small my-1">{{ comment.date }}</p>
+                                        <p class > {{ comment.content }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+        </div>
+        </div>
+    </div>
+
+{% else %}
+<h2><strong>Sorry</strong>, this item is no longer available.</h2>
+{% endif %}
+{% endblock %}
